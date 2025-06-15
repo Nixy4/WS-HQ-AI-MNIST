@@ -5,15 +5,12 @@ import torch
 import torch.nn as nn
 import torchvision.transforms.v2 as v2
 
-class FCNN0(nn.Module):
-
-  #! 定义一个顺序容器
-  # sequential = None
+class MyFCNN(nn.Module):
 
   #! 定义构造函数
   def __init__(self):
     # 调用父类的构造函数
-    super(FCNN0, self).__init__()
+    super(MyFCNN, self).__init__()
     #初始化顺序容器, 向容器中添加层, 容器会自动将层按添加顺序连接起来
     self.sequential = nn.Sequential(
       nn.Flatten(),#1.张量展平层
@@ -22,7 +19,7 @@ class FCNN0(nn.Module):
       nn.Linear(100, 10), #4.全连接层
       nn.LogSoftmax(dim=1) #5.对数Softmax层
     )
-    log.info("FCNN0初始化成功")
+    log.info("MyFCNN初始化成功")
 
     '''
     1.  nn.Flatten()：输入图片分辨率为28x28, 像素数量为28x28=784, 该层将输入张量展平为一维向量。
@@ -38,7 +35,7 @@ class FCNN0(nn.Module):
     return self.sequential(x)
 
 # 实例化网络 张量转换器
-module = FCNN0()
+my_fcnn_module = MyFCNN()
 
 # 定义图像转换器
 img_transform = v2.Compose([
@@ -51,7 +48,7 @@ img_file = Image.open(img_path)
 img_tensor = img_transform(img_file)
 
 #输入数据
-y = module.forward(img_tensor)
+y = my_fcnn_module.forward(img_tensor)
 # 打印输出
 log.info(f'输出结果:\n{y}')
 

@@ -1,5 +1,4 @@
-import logging
-
+from logger import log
 import torch
 import torch.nn as nn
 import torchvision.transforms.v2 as v2
@@ -7,10 +6,10 @@ import PIL
 import PIL.Image as Image
 import numpy as np
 
-class CNN0(nn.Module):
+class MyCNNs(nn.Module):
 
   def __init__(self):
-    super(CNN0, self).__init__()
+    super(MyCNNs, self).__init__()
     self.Sequential = nn.Sequential(
       nn.Conv2d(1, 10, 3),
       nn.ReLU(),
@@ -73,7 +72,7 @@ class CNN0(nn.Module):
 
 img_path = './imgs/0_5.png'
 img_obj = Image.open(img_path)
-logging.info('图片{}已打开'.format(img_path))
+log.info('图片{}已打开'.format(img_path))
 
 def log_img(img: PIL.Image.Image):
     arr = np.array(img)
